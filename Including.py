@@ -33,14 +33,26 @@ try:
     location = input("Enter the file name or directory in which the file exists : ")
     #Checking if filepath exists
     if(os.path.exists(location)):
-        print("Ok")
+        print("Ok found location!")
         w = input("Enter the word you want to search for : ")
-        wordCount(w,location)
+        #Checking if location is a file to avoid error of permission
+        isFile = os.path.isfile(location)
+        if isFile:
+            wordCount(w,location)
+        else:
+            location = input("Enter the file name with the directory now for verification: ")
+            #Checking if filepath exists
+            if(os.path.exists(location)):
+                #Checking if location is a file to avoid error of permission
+                isFile = os.path.isfile(location)
+                if isFile:
+                    wordCount(w,location)
+                else:
+                    print("Ok you don't know english as you again added a folder.")
     else:
         print("Directory doesnt exist")
 #Just in case some error appears
 except Exception as e:
     print("Something went wrong :)\nError is",e)
 #Program ends :)
-    
 
